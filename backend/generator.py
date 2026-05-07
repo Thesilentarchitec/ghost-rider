@@ -1,20 +1,44 @@
-import asyncio
 import os
 import random
 import requests
+import asyncio
+import uuid
 from moviepy import (
     VideoFileClip, 
     AudioFileClip, 
     TextClip, 
     CompositeVideoClip, 
-    ColorClip,
-    vfx
+    ColorClip
 )
 import edge_tts
-import uuid
+from groq import Groq
+from dotenv import load_dotenv
 
-# Placeholders for keys
+load_dotenv()
+
+# API Keys
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY", "")
+
+client = Groq(api_key=GROQ_API_KEY)
+
+async def generate_script(topic):
+    """Generates a short script using Groq."""
+    if not GROQ_API_KEY:
+        return f"Have you ever wondered about {topic}? It's a fascinating subject that experts are still studying today. Stay tuned for more amazing facts!"
+    
+    prompt = f"Write a very short, engaging script (about 30-40 words) for a faceless video about {topic}. The tone should be intriguing and fast-paced. Just the script text, no meta-commentary."
+    
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+        model="llama-3.1-8b-instant",
+    )
+    return chat_completion.choices[0].message.content
 
 async def generate_audio(text, output_path, voice="en-US-ChristopherNeural"):
     communicate = edge_tts.Communicate(text, voice)
@@ -22,42 +46,40 @@ async def generate_audio(text, output_path, voice="en-US-ChristopherNeural"):
 
 def get_stock_videos(query, count=3):
     """
-    Mock or real Pexels search. 
-    If no key, returns a list of local placeholders or public URLs.
+    Fetch stock videos from Pexels. 
+    If no key, returns a list of public URLs.
     """
     if not PEXELS_API_KEY:
-        # Return some public sample videos
         return [
-            "https://p-def6.pstatic.net/600/600/600/600/600/600/600/600/600/600/600/600/600/600/600/600/sample.mp4" # Just a placeholder
+            "https://videos.pexels.com/video-files/3195333/3195333-uhd_1080_1920_25fps.mp4",
+            "https://videos.pexels.com/video-files/3191572/3191572-uhd_1080_1920_25fps.mp4",
+            "https://videos.pexels.com/video-files/3209828/3209828-uhd_1080_1920_25fps.mp4"
         ]
     
     headers = {"Authorization": PEXELS_API_KEY}
     url = f"https://api.pexels.com/videos/search?query={query}&per_page={count}&orientation=portrait"
-    r = requests.get(url, headers=headers)
-    data = r.json()
-    
-    video_urls = []
-    for video in data.get('videos', []):
-        # Get the smallest HD file
-        files = video.get('video_files', [])
-        # Sort by width, pick one around 720 or 1080
-        files = sorted(files, key=lambda x: x['width'])
-        if files:
-            video_urls.append(files[0]['link'])
-    return video_urls
+    try:
+        r = requests.get(url, headers=headers)
+        data = r.json()
+        video_urls = []
+        for video in data.get('videos', []):
+            files = video.get('video_files', [])
+            # Prefer mobile-friendly files
+            files = sorted(files, key=lambda x: x['width'])
+            if files:
+                video_urls.append(files[0]['link'])
+        return video_urls if video_urls else get_stock_videos("nature") # Fallback
+    except:
+        return get_stock_videos("nature")
 
 async def create_video(topic, output_filename):
-    # 1. Scripting (Slightly improved mock)
-    # In a real app, you'd call Groq/OpenAI here.
-    script = (
-        f"Have you ever wondered about {topic}? "
-        f"It's a topic that has captured the imagination of many. "
-        f"From its mysterious origins to its impact on the world today, {topic} continues to be a subject of intense study. "
-        f"Thanks for watching this Ghost rider production!"
-    )
+    # 1. Scripting
+    script = await generate_script(topic)
+    print(f"Generated script: {script}")
     
     job_id = str(uuid.uuid4())
     temp_audio = f"temp_audio_{job_id}.mp3"
+    temp_video_path = None
     
     # 2. Generate Audio
     await generate_audio(script, temp_audio)
@@ -65,14 +87,39 @@ async def create_video(topic, output_filename):
     duration = audio_clip.duration
     
     # 3. Create Visuals
-    # For now, let's use a ColorClip if no stock video is found or available
-    # because downloading might fail or be slow in this environment without a key.
+    video_urls = get_stock_videos(topic)
     
-    bg_clip = ColorClip(size=(720, 1280), color=(24, 24, 27), duration=duration)
-    
+    try:
+        selected_video_url = random.choice(video_urls)
+        print(f"Downloading stock video from: {selected_video_url}")
+        
+        video_response = requests.get(selected_video_url, stream=True, headers={'User-Agent': 'Mozilla/5.0'})
+        temp_video_path = f"temp_video_{job_id}.mp4"
+        with open(temp_video_path, 'wb') as f:
+            for chunk in video_response.iter_content(chunk_size=8192):
+                if chunk: f.write(chunk)
+            
+        bg_clip = VideoFileClip(temp_video_path).subclipped(0, duration)
+        
+        # Resize/Crop to 720x1280 (9:16)
+        w, h = bg_clip.size
+        target_ratio = 720 / 1280
+        current_ratio = w / h
+        
+        if current_ratio > target_ratio:
+            bg_clip = bg_clip.resized(height=1280)
+            w, h = bg_clip.size
+            bg_clip = bg_clip.cropped(x1=w/2-360, y1=0, x2=w/2+360, y2=1280)
+        else:
+            bg_clip = bg_clip.resized(width=720)
+            w, h = bg_clip.size
+            bg_clip = bg_clip.cropped(x1=0, y1=h/2-640, x2=720, y2=h/2+640)
+            
+    except Exception as e:
+        print(f"Failed to load stock video: {e}. Falling back to color clip.")
+        bg_clip = ColorClip(size=(720, 1280), color=(24, 24, 27)).with_duration(duration)
+
     # 4. Add Text/Captions
-    # Note: TextClip might require ImageMagick. Let's see if we can use it.
-    # If not, we might need to rely on other methods.
     try:
         txt_clip = TextClip(
             text=script, 
@@ -94,9 +141,11 @@ async def create_video(topic, output_filename):
     
     # Cleanup
     audio_clip.close()
+    if bg_clip: bg_clip.close()
     if os.path.exists(temp_audio):
         os.remove(temp_audio)
+    if temp_video_path and os.path.exists(temp_video_path):
+        os.remove(temp_video_path)
 
 if __name__ == "__main__":
-    # Test
     asyncio.run(create_video("Python Programming", "test_output.mp4"))

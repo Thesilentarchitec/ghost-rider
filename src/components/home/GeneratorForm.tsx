@@ -62,8 +62,8 @@ export default function GeneratorForm({ title = "Create a faceless video" }: Gen
       }, 500);
 
       console.log("Calling backend for topic:", topic);
-      const backendUrl = `http://${window.location.hostname}:8000/generate`;
-      const response = await fetch(backendUrl, {
+      const backendBaseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || `http://${window.location.hostname}:8000`;
+      const response = await fetch(`${backendBaseUrl}/generate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export default function GeneratorForm({ title = "Create a faceless video" }: Gen
 
       const data = await response.json();
       setProgress(100);
-      setGeneratedVideoUrl(`http://${window.location.hostname}:8000/video/${data.job_id}`);
+      setGeneratedVideoUrl(`${backendBaseUrl}/video/${data.job_id}`);
       setIsGenerating(false);
     } catch (error) {
       console.error(error);

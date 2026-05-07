@@ -5,3 +5,4 @@ edge-tts
 requests
 python-dotenv
 asyncio
+groq
