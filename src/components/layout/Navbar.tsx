@@ -33,9 +33,9 @@ export default function Navbar() {
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Link href="#" className="hover:text-white transition-colors">Pricing</Link>
-          <Link href="#" className="hover:text-white transition-colors">Blog</Link>
-          <Link href="#" className="hover:text-white transition-colors flex items-center gap-1">
+          <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
+          <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+          <Link href="/affiliate" className="hover:text-white transition-colors flex items-center gap-1">
             Affiliate Program
             <span className="bg-orange-500 text-black text-[10px] px-1 rounded uppercase font-bold">New</span>
           </Link>

@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
 import { tools } from "@/lib/tools";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Hero from "@/components/home/Hero";
 import GeneratorForm from "@/components/home/GeneratorForm";
 import HowItWorks from "@/components/home/HowItWorks";
@@ -32,14 +30,12 @@ export default async function ToolPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-black selection:bg-orange-500 selection:text-black">
-      <Navbar />
       <Hero title={tool.heroTitle} description={tool.heroDescription} />
       <GeneratorForm title={tool.title} />
       <HowItWorks />
       <Features toolName={tool.title} />
       <FAQ toolName={tool.title} />
       <SimilarTools />
-      <Footer />
     </main>
   );
 }
