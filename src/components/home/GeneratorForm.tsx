@@ -40,25 +40,53 @@ export default function GeneratorForm({ title = "Create a faceless video" }: Gen
   const [channelStyle, setChannelStyle] = useState("facts");
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [generatedVideoUrl, setGeneratedVideoUrl] = useState<string | null>(null);
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
+    if (!topic) return;
+    
     setIsGenerating(true);
-    setProgress(0);
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return prev + 5;
-      });
-    }, 200);
+    setProgress(10);
+    setGeneratedVideoUrl(null);
 
-    setTimeout(() => {
+    try {
+      // Start progress simulation
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 90) {
+            clearInterval(interval);
+            return 90;
+          }
+          return prev + 5;
+        });
+      }, 500);
+
+      console.log("Calling backend for topic:", topic);
+      const backendUrl = `http://${window.location.hostname}:8000/generate`;
+      const response = await fetch(backendUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ topic }),
+      });
+
+      clearInterval(interval);
+
+      if (!response.ok) {
+        throw new Error("Generation failed");
+      }
+
+      const data = await response.json();
+      setProgress(100);
+      setGeneratedVideoUrl(`http://${window.location.hostname}:8000/video/${data.job_id}`);
+      setIsGenerating(false);
+    } catch (error) {
+      console.error(error);
       setIsGenerating(false);
       setProgress(0);
-      alert("Video generation complete! (This is a mock)");
-    }, 5000);
+      alert("Video generation failed. Please check backend logs.");
+    }
   };
 
   return (
@@ -86,7 +114,7 @@ export default function GeneratorForm({ title = "Create a faceless video" }: Gen
                 />
                 <div className="flex justify-between text-[10px] text-gray-500">
                   <span>Number of words: {topic.split(/\s+/).filter(Boolean).length}</span>
-                  <span>Estimated video duration: 15 seconds</span>
+                  <span>Estimated video duration: ~15 seconds</span>
                   <span>{topic.length}/500</span>
                 </div>
               </div>
@@ -237,7 +265,7 @@ export default function GeneratorForm({ title = "Create a faceless video" }: Gen
               <Button 
                 className="w-full bg-orange-500 hover:bg-orange-600 text-black font-black py-6 rounded-xl text-lg flex items-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={handleGenerate}
-                disabled={isGenerating}
+                disabled={isGenerating || !topic}
               >
                 <Sparkles className={`w-5 h-5 ${isGenerating ? "animate-spin" : "group-hover:animate-pulse"}`} />
                 {isGenerating ? `Generating... ${progress}%` : "Generate video"}
@@ -253,27 +281,42 @@ export default function GeneratorForm({ title = "Create a faceless video" }: Gen
         {/* Output Side */}
         <div className="space-y-4">
           <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Output Example</h3>
-          <Card className="bg-zinc-900/50 border-zinc-800 overflow-hidden aspect-[9/16] relative group">
-            <img 
-              src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80&w=400" 
-              alt="Output example" 
-              className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500"
-            />
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 space-y-4">
-              <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center">
-                <Play className="w-8 h-8 text-black fill-current ml-1" />
+          <Card className="bg-zinc-900/50 border-zinc-800 overflow-hidden aspect-[9/16] relative group flex items-center justify-center">
+            {generatedVideoUrl ? (
+              <video 
+                src={generatedVideoUrl} 
+                controls 
+                autoPlay 
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              <>
+                <img 
+                  src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&q=80&w=400" 
+                  alt="Output example" 
+                  className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500"
+                />
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 space-y-4">
+                  <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center">
+                    <Play className="w-8 h-8 text-black fill-current ml-1" />
+                  </div>
+                  <div>
+                    <p className="text-white font-bold">Watch Example</p>
+                    <p className="text-gray-400 text-xs">See what Ghost rider can generate in seconds.</p>
+                  </div>
+                </div>
+              </>
+            )}
+            {!generatedVideoUrl && (
+              <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md p-3 rounded-lg border border-white/10">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
+                  <span className="text-[10px] text-white font-medium uppercase tracking-tighter">
+                    {isGenerating ? "Processing..." : "Ready to generate"}
+                  </span>
+                </div>
               </div>
-              <div>
-                <p className="text-white font-bold">Watch Example</p>
-                <p className="text-gray-400 text-xs">See what Ghost rider can generate in seconds.</p>
-              </div>
-            </div>
-            <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md p-3 rounded-lg border border-white/10">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
-                <span className="text-[10px] text-white font-medium uppercase tracking-tighter">Ready to generate</span>
-              </div>
-            </div>
+            )}
           </Card>
         </div>
       </div>

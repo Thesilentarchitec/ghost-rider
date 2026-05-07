@@ -1,22 +1,25 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { tools } from "@/lib/tools";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 
 export default function SimilarTools() {
   const pathname = usePathname();
   
-  const filteredTools = useMemo(() => {
+  const [filteredTools, setFilteredTools] = useState<typeof tools>([]);
+  
+  useEffect(() => {
     // Current tool slug if we're on a tool page
     const currentSlug = pathname.split("/").pop();
-    return tools
+    const result = tools
       .filter(t => t.slug !== currentSlug)
       .sort(() => 0.5 - Math.random())
       .slice(0, 3);
+    setFilteredTools(result);
   }, [pathname]);
 
   return (
