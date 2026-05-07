@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { tools } from "@/lib/tools";
 
 export default function Navbar() {
   return (
@@ -22,10 +23,14 @@ export default function Navbar() {
             <DropdownMenuTrigger className="hover:text-white transition-colors flex items-center gap-1 outline-none">
               AI Video Tools <ChevronDown className="w-4 h-4" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-zinc-900 border-zinc-800 text-white">
-              <DropdownMenuItem className="focus:bg-zinc-800 focus:text-white cursor-pointer">AI TikTok Generator</DropdownMenuItem>
-              <DropdownMenuItem className="focus:bg-zinc-800 focus:text-white cursor-pointer">AI YouTube Shorts</DropdownMenuItem>
-              <DropdownMenuItem className="focus:bg-zinc-800 focus:text-white cursor-pointer">AI Instagram Reels</DropdownMenuItem>
+            <DropdownMenuContent className="bg-zinc-900 border-zinc-800 text-white max-h-[70vh] overflow-y-auto w-64 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent">
+              {tools.map((tool) => (
+                <DropdownMenuItem key={tool.slug} className="focus:bg-zinc-800 focus:text-white cursor-pointer p-0">
+                  <Link href={`/tools/${tool.slug}`} className="w-full px-2 py-1.5 inline-block">
+                    {tool.title}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
           <Link href="#" className="hover:text-white transition-colors">Pricing</Link>

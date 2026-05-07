@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Ghost } from "lucide-react";
+import { tools } from "@/lib/tools";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -30,16 +31,19 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="md:col-span-2">
           <h3 className="font-bold mb-4 uppercase text-xs tracking-widest text-gray-500">Tools</h3>
-          <ul className="space-y-2 text-sm text-gray-400 font-medium">
-            <li><Link href="#" className="hover:text-white transition-colors">AI TikTok Video Generator</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">AI YouTube Shorts Generator</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">AI Instagram Reels Generator</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">AI Pixar Video Generator</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">AI Anime Video Generator</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors text-orange-500">Faceless AI Video Generator</Link></li>
-          </ul>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+            {tools.map((tool) => (
+              <Link 
+                key={tool.slug} 
+                href={`/tools/${tool.slug}`} 
+                className={`text-sm font-medium transition-colors hover:text-white ${tool.slug === 'faceless-ai-video-generator' ? 'text-orange-500' : 'text-gray-400'}`}
+              >
+                {tool.title}
+              </Link>
+            ))}
+          </div>
         </div>
 
         <div>

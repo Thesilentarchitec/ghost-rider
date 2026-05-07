@@ -5,23 +5,27 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export default function FAQ() {
+interface FAQProps {
+  toolName: string;
+}
+
+export default function FAQ({ toolName }: FAQProps) {
   const faqs = [
     {
-      q: "What does the Faceless AI Video Generator do?",
-      a: "The Faceless AI Video Generator turns a topic, idea, or script into a faceless social video with AI-generated visuals, narration, captions, music options, and social-ready pacing."
+      q: `What does the ${toolName} do?`,
+      a: `The ${toolName} turns a topic, idea, or script into a high-quality social video with AI-generated visuals, narration, captions, music options, and platform-optimized pacing.`
     },
     {
-      q: "Who is the Faceless AI Video Generator best for?",
-      a: "It's perfect for content creators, marketers, and anyone looking to build a presence on YouTube, TikTok, or Instagram without showing their face."
+      q: `Who is the ${toolName} best for?`,
+      a: "It's perfect for content creators, marketers, and businesses looking to build a strong presence on social media with consistent, high-quality video content."
     },
     {
       q: "Can I edit the generated video?",
-      a: "Yes, you can edit the script, change the voice, or select different visual styles before finalizing your video."
+      a: "Yes, you can customize various aspects of the video, including visual styles and AI voices, before finalizing your creation."
     },
     {
       q: "What format does Ghost rider create?",
-      a: "Ghost rider generates vertical videos (9:16 aspect ratio) optimized for YouTube Shorts, TikTok, and Instagram Reels."
+      a: "Ghost rider generates vertical videos (9:16 aspect ratio) perfectly optimized for YouTube Shorts, TikTok, Instagram Reels, and other mobile-first platforms."
     }
   ];
 
@@ -36,7 +40,7 @@ export default function FAQ() {
             Got Questions? We've Got Answers
           </h2>
           <p className="text-gray-400 text-sm">
-            Learn how the Faceless AI Video Generator works and what you can create with it.
+            Learn how our AI video tools work and what you can create with them.
           </p>
         </div>
 

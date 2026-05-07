@@ -29,7 +29,11 @@ const VOICES = [
   { id: "brittney", name: "Brittney", gender: "♀", desc: "Bright voice for education and social content." },
 ];
 
-export default function GeneratorForm() {
+interface GeneratorFormProps {
+  title?: string;
+}
+
+export default function GeneratorForm({ title = "Create a faceless video" }: GeneratorFormProps) {
   const [topic, setTopic] = useState("");
   const [selectedStyle, setSelectedStyle] = useState("cinematic");
   const [selectedVoice, setSelectedVoice] = useState("adam");
@@ -66,16 +70,16 @@ export default function GeneratorForm() {
             {/* Topic Section */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold">Create a faceless video</h2>
+                <h2 className="text-xl font-bold">{title}</h2>
                 <span className="bg-orange-500 text-black text-[10px] px-2 py-0.5 rounded uppercase font-bold">Prompt</span>
               </div>
               <p className="text-gray-400 text-sm">Describe the niche, format, and viewer takeaway.</p>
               
               <div className="space-y-2">
-                <Label htmlFor="topic" className="text-xs uppercase tracking-wider text-gray-500 font-bold">Faceless video topic</Label>
+                <Label htmlFor="topic" className="text-xs uppercase tracking-wider text-gray-500 font-bold">Video topic</Label>
                 <Textarea 
                   id="topic"
-                  placeholder="Create a faceless video about three psychology facts that explain procrastination and how to break the cycle."
+                  placeholder="Enter your topic here..."
                   className="bg-black border-zinc-800 min-h-[120px] focus:ring-orange-500"
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
@@ -89,13 +93,13 @@ export default function GeneratorForm() {
 
               <div className="flex flex-wrap gap-2">
                 <Button variant="outline" size="sm" className="bg-zinc-900 border-zinc-800 text-[10px] h-8 hover:bg-zinc-800" onClick={() => setTopic("Create a psychology facts video with a strong hook.")}>
-                  Create a psychology facts video with a strong hook.
+                  Facts video hook.
                 </Button>
-                <Button variant="outline" size="sm" className="bg-zinc-900 border-zinc-800 text-[10px] h-8 hover:bg-zinc-800" onClick={() => setTopic("Make a faceless history short about a strange event.")}>
-                  Make a faceless history short about a strange event.
+                <Button variant="outline" size="sm" className="bg-zinc-900 border-zinc-800 text-[10px] h-8 hover:bg-zinc-800" onClick={() => setTopic("Make a history short about a strange event.")}>
+                  History short.
                 </Button>
                 <Button variant="outline" size="sm" className="bg-zinc-900 border-zinc-800 text-[10px] h-8 hover:bg-zinc-800" onClick={() => setTopic("Turn a motivational idea into a voiceover-led video.")}>
-                  Turn a motivational idea into a voiceover-led video.
+                  Motivational idea.
                 </Button>
               </div>
             </div>
@@ -236,7 +240,7 @@ export default function GeneratorForm() {
                 disabled={isGenerating}
               >
                 <Sparkles className={`w-5 h-5 ${isGenerating ? "animate-spin" : "group-hover:animate-pulse"}`} />
-                {isGenerating ? `Generating... ${progress}%` : "Generate faceless video"}
+                {isGenerating ? `Generating... ${progress}%` : "Generate video"}
                 {!isGenerating && <span className="text-sm opacity-50">→</span>}
               </Button>
             </div>
