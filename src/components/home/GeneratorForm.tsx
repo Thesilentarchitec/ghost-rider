@@ -62,7 +62,7 @@ export default function GeneratorForm({ title = "Create a faceless video" }: Gen
       }, 500);
 
       console.log("Calling backend for topic:", topic);
-      const backendBaseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || `http://${window.location.hostname}:8000`;
+      const backendBaseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "/_/backend";
       const response = await fetch(`${backendBaseUrl}/generate`, {
         method: "POST",
         headers: {

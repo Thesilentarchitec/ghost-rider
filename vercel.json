@@ -10,8 +10,12 @@
   ],
   "rewrites": [
     {
-      "source": "/api/:path*",
+      "source": "/_/backend/:path*",
       "destination": "http://api:8000/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
     }
   ]
 }
