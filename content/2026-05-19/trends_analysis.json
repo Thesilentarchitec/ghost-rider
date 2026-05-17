@@ -1,0 +1,82 @@
+{
+  "motivation": {
+    "trending_topics": [
+      "The Ghost in the Machine: Human focus in an AI-saturated world",
+      "Logic Engineering: Why discipline now requires high-level thinking",
+      "Radical Presence: The power of being 'unplugged' in 2026"
+    ],
+    "viral_hooks": [
+      "Your AI is working 24/7, but you're still burnt out. Here's why.",
+      "The most valuable skill in 2026 isn't coding; it's the ability to focus for 4 hours straight.",
+      "I stopped checking the algorithm and started checking my own pulse. Here's what happened."
+    ],
+    "aesthetic": "RAW — gritty, film-grain, documentary feel",
+    "music_vibes": "Industrial ambient lo-fi, 90bpm"
+  },
+  "learning": {
+    "trending_topics": [
+      "Logic over Prompts: The shift to system thinking",
+      "Neural Feedback Loops: Using biometric data to learn 3x faster",
+      "The $14B Meta-Scale AI Infrastructure: What it means for students"
+    ],
+    "viral_hooks": [
+      "Stop learning prompts. Start learning logic. Here’s the difference.",
+      "The Meta-Scale deal just changed how we learn forever. Are you ready?",
+      "3 counter-intuitive facts about how your brain actually processes information in the digital age."
+    ],
+    "aesthetic": "CLEAN — minimal white space, single word, architectural",
+    "music_vibes": "Minimalist glitch-hop, 75bpm"
+  },
+  "leadership": {
+    "trending_topics": [
+      "The Transparent Cap Table: Leading with radical equity",
+      "Leading through the Gold/Silver Volatility",
+      "The AI-First Leader: Managing human-agent hybrid teams"
+    ],
+    "viral_hooks": [
+      "If your team doesn't know the cap table, they're not a team. They're just employees.",
+      "The best leaders in 2026 don't give orders; they set the objective and get out of the way.",
+      "Leadership isn't about being the smartest person in the room; it's about being the one who listens the longest."
+    ],
+    "aesthetic": "BOLD — oversized typography, split screen, loud contrast",
+    "music_vibes": "Cinematic orchestral with a trap beat build"
+  },
+  "make_money": {
+    "trending_topics": [
+      "Arbitraging the Gold/Silver Plunge: Buying the fear",
+      "The Scale AI Agency Model: Building on the new Meta infrastructure",
+      "Hyper-Niche Bootstrapping: Why $1M ARR is the new $10M"
+    ],
+    "viral_hooks": [
+      "Gold is down, silver is down, but my portfolio is up. Here's the play.",
+      "The Meta-Scale deal just created a $14B opportunity for small agencies. Here's how to grab it.",
+      "I built a $100k/month business without a single VC pitch. Here is the system."
+    ],
+    "aesthetic": "CINEMATIC — movie still composition, dramatic lighting, 2.39:1 aspect",
+    "music_vibes": "High-energy phonk loop, 125bpm"
+  },
+  "stoicism": {
+    "trending_topics": [
+      "The Beijing Summit Mindset: Equanimity amidst global warnings",
+      "Amor Fati and Market Crashes: Finding the growth in the dip",
+      "The Inner Citadel vs. The Algorithm: Protecting your peace"
+    ],
+    "viral_hooks": [
+      "Xi is warning, the Fed is changing, and you're worried about a comment on your post? Re-read Aurelius.",
+      "You can't control the market, but you can control your reaction to it. That's the only edge you have left.",
+      "The stoic secret to remaining calm when everyone else is panic-buying gold."
+    ],
+    "aesthetic": "DARK LUXURY — deep blacks, gold accents, editorial composition",
+    "music_vibes": "Dark cinematic ambient, slow-burn build"
+  },
+  "general_trends": {
+    "hook_patterns": [
+      "The end of X is here...",
+      "Nobody is talking about the $14B...",
+      "The most valuable skill in 2026 is..."
+    ],
+    "visual_styles": "Dominance of 'Cinematic Documentary' — mixing high-end luxury shots with raw, handheld footage.",
+    "music_patterns": "Heavy shift towards high-tempo phonk for 'Money' and 'Leadership', and industrial lo-fi for 'Motivation'."
+  },
+  "date": "2026-05-19"
+}
