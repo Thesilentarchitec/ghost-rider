@@ -1,0 +1,82 @@
+{
+  "motivation": {
+    "trending_topics": [
+      "Museums Come Alive (Historical Reframing)",
+      "Digital Detox vs. AI Integration",
+      "The 'Observation' Phase of Growth"
+    ],
+    "viral_hooks": [
+      "Stop looking at your screen and start looking at history.",
+      "You're not losing, you're just in the 'Museum' phase of your life.",
+      "What Marcus Aurelius would say about your phone in 2026..."
+    ],
+    "aesthetic": "RAW — Grit, museum lighting, archival footage feel",
+    "music_vibes": "Dark cinematic lo-fi with echoes, 80bpm"
+  },
+  "learning": {
+    "trending_topics": [
+      "Gesture-Driven Learning (Meta Display AI)",
+      "LinkedIn Creator-Led Original Events",
+      "Reddit as a Primary Research Tool"
+    ],
+    "viral_hooks": [
+      "The end of textbooks is here. Look at your hands.",
+      "You were never taught this because it didn't exist until today.",
+      "How to access the top 1% of LinkedIn's 4,000 annual events."
+    ],
+    "aesthetic": "CLEAN — Minimalist, high-tech overlays, white space",
+    "music_vibes": "Focus lo-fi with subtle digital glitches, 75bpm"
+  },
+  "leadership": {
+    "trending_topics": [
+      "The Rise of the 'Creator-Leader'",
+      "Gated Communities & Exclusive Authority",
+      "Decentralized Influence on Professional Networks"
+    ],
+    "viral_hooks": [
+      "The title of 'CEO' is dead. The 'Creator-Leader' is taking over.",
+      "If you're not gated, you're not premium. Here's why.",
+      "Leadership isn't about numbers; it's about curated access."
+    ],
+    "aesthetic": "BOLD — Oversized typography, split screen, high contrast",
+    "music_vibes": "Uplifting orchestral build with modern beats"
+  },
+  "make_money": {
+    "trending_topics": [
+      "AI Ad Tools from TikTok World 2026",
+      "Gesture-Driven App Development",
+      "Monetizing Reddit Search Patterns"
+    ],
+    "viral_hooks": [
+      "Stop building websites. Build gesture-driven apps for Meta.",
+      "TikTok World 2026 just changed the game for small businesses.",
+      "I found a $10k/month product idea using Reddit research."
+    ],
+    "aesthetic": "CINEMATIC — Dramatic lighting, movie still composition",
+    "music_vibes": "High-energy 15-sec phonk/trap loops, 120bpm"
+  },
+  "stoicism": {
+    "trending_topics": [
+      "Digital Privacy as a Stoic Virtue",
+      "Incognito AI & The Inner Citadel",
+      "Amor Fati in the Age of Constant Updates"
+    ],
+    "viral_hooks": [
+      "Privacy is the new luxury. Stoics would love incognito AI.",
+      "Control what you can: your data and your mind.",
+      "The stoic secret to surviving a week of constant updates."
+    ],
+    "aesthetic": "DARK LUXURY — Deep blacks, gold/amber accents, editorial",
+    "music_vibes": "Dark cinematic ambient, slow-burn build"
+  },
+  "general_trends": {
+    "breakout_hooks": [
+      "The secret is not X, it's Y",
+      "I wish I knew at 20 (2026 Edition)",
+      "Stop doing X, start doing Y"
+    ],
+    "dominant_visual_style": "Cinematic Documentary — archival feels mixed with high-tech HUD overlays.",
+    "music_patterns": "Heavy shift towards 'Museum Ambient' and 'AI-Phonk'."
+  },
+  "date": "2026-05-18"
+}
