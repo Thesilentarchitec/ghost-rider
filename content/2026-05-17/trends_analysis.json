@@ -1,0 +1,81 @@
+{
+  "motivation": {
+    "trending_topics": [
+      "Dopamine Detox & Brain Reset",
+      "The 10-Year Rule (Long-term thinking)",
+      "Mental Fortitude in the AI Age"
+    ],
+    "viral_hooks": [
+      "You're not lazy, your brain is just fried...",
+      "The 1% rule you were never taught...",
+      "I stopped waiting for motivation and did this instead..."
+    ],
+    "aesthetic": "RAW — gritty, film-grain, documentary feel",
+    "music_vibes": "Dark cinematic lo-fi beat, 85bpm"
+  },
+  "learning": {
+    "trending_topics": [
+      "Meta-learning (Learning how to learn)",
+      "AI-Assisted Educational Hacks",
+      "The Feynman Technique 2.0"
+    ],
+    "viral_hooks": [
+      "Nobody tells you this about how your brain learns...",
+      "How to master any skill in 30 days (without burnout)...",
+      "3 facts that will completely change your perspective..."
+    ],
+    "aesthetic": "CLEAN — minimal white space, single word, architectural",
+    "music_vibes": "Minimalist focus lo-fi, 70bpm"
+  },
+  "leadership": {
+    "trending_topics": [
+      "Fractional Leadership & Digital Teams",
+      "Quiet Ambition vs. Hustle Culture",
+      "Decentralized Command in Remote Work"
+    ],
+    "viral_hooks": [
+      "Stop managing people, start leading movements...",
+      "The #1 mistake that kills team morale...",
+      "Leadership isn't a title, it's a behavior..."
+    ],
+    "aesthetic": "BOLD — oversized typography, split screen, loud contrast",
+    "music_vibes": "Uplifting acoustic with cinematic build"
+  },
+  "make_money": {
+    "trending_topics": [
+      "High-ticket AI Service Agencies",
+      "Digital Leverage & Automation Systems",
+      "The 'Solopreneur' Economy in 2025"
+    ],
+    "viral_hooks": [
+      "Stop trading your time for a paycheck...",
+      "The most profitable skill you can learn in 2025...",
+      "How I'd build a $10k/month business starting from zero..."
+    ],
+    "aesthetic": "CINEMATIC — movie still composition, dramatic lighting",
+    "music_vibes": "High-energy 15-sec loop, phonk/trap influence"
+  },
+  "stoicism": {
+    "trending_topics": [
+      "Modern Stoicism for Digital Anxiety",
+      "The 'Pre-Mortem' as a productivity tool",
+      "Amor Fati: Loving the obstacles"
+    ],
+    "viral_hooks": [
+      "Marcus Aurelius didn't have a phone, but he knew this...",
+      "You can't control what happens, but you can control...",
+      "The stoic secret to remaining calm when everything goes wrong..."
+    ],
+    "aesthetic": "DARK LUXURY — deep blacks, gold accents, editorial composition",
+    "music_vibes": "Dark cinematic ambient, slow-burn build"
+  },
+  "general_trends": {
+    "hook_patterns": [
+      "Nobody tells you this...",
+      "I wish I knew at 20...",
+      "Stop doing X, start doing Y"
+    ],
+    "visual_styles": "Dominance of high-contrast text-on-black and raw documentary footage.",
+    "music_patterns": "Heavy shift towards immersive cinematic lo-fi and fast-paced phonk loops."
+  }
+}
