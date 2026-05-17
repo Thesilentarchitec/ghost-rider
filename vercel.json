@@ -1,21 +1,9 @@
 {
   "version": 2,
-  "services": [
-    {
-      "name": "api",
-      "src": "backend",
-      "installCommand": "pip install -r requirements.txt",
-      "runCommand": "uvicorn app:app --host 0.0.0.0 --port $PORT"
-    }
-  ],
   "rewrites": [
     {
       "source": "/_/backend/:path*",
-      "destination": "http://api:8000/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/$1"
+      "destination": "/api/:path*"
     }
   ]
 }
